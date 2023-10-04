@@ -1,25 +1,7 @@
-#  LOG_FILE=/tmp/frontend
-#
-
-#
-#    mv frontend-main/static/* . &>>$LOG_FILE
-#    mv frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf &>>$LOG_FILE
-#
-#
-#    echo starting Nginx Service
-#    systemctl enable nginx &>>$LOG_FILE
-#    systemctl restart nginx &>>$LOG_FILE
-#    StatusCheck $?
-
-- name: Install Nginxx
+- name: Install Nginx
   ansible.builtin.yum:
     name: nginx
     state: installed
-
-- name: Start nginx service
-  ansible.builtin.service:
-    state: started
-    name: nginx
 
 
 
@@ -44,3 +26,10 @@
   ansible.builtin.copy:
     src: roboshop.conf
     dest: /etc/nginx/default.d/roboshop.conf
+
+
+- name: Start nginx service
+  ansible.builtin.systemd:
+    state: restarted
+    name: nginx
+    enabled: yes
