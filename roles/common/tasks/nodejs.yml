@@ -22,3 +22,6 @@
   ansible.builtin.yum:
     name: nodejs
     state: installed
+
+- name: Import App Pre req Task File
+  ansible.builtin.import_tasks: app-prereq.yml
