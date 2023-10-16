@@ -1,0 +1,24 @@
+#echo "Downlod NodeJs Component"
+#curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash - &>>$LOG_FILE
+#StatusCheck $?
+#
+#echo " Installing Nodejs"
+#yum install nodejs -y &>>$LOG_FILE
+#StatusCheck $?
+#
+#
+#APP_PREREQ                  # Calling funtion inside funtion We have Same requirement for nodejs & java like create user and all
+#
+#echo "Installing Nodejs Dependencies"
+#npm install &>>$LOG_FILE
+#StatusCheck $?
+#
+#SYSTEMD_SETUP                 # calling function inside funtion cause systemd is common in both Java & Nodejs
+
+- name: Setup Nodejs repos
+  ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_16.x | bash
+
+- name: Install nodejs
+  ansible.builtin.yum:
+    name: nodejs
+    state: installed
